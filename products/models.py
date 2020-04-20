@@ -16,3 +16,9 @@ class CartNew(models.Model):
     quantity = models.IntegerField(default=1)
     cost = models.IntegerField(default=0)
     orderedby = models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+class Wish(models.Model):
+    name = models.CharField(max_length=30)
+    cost = models.IntegerField(default=0)
+    orderedby = models.ForeignKey(User,on_delete=models.CASCADE)

@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Product,CartNew
+from .models import Product,CartNew,Wish
 from .forms import CartForm,Filter
 
 def homepage(request):
@@ -67,6 +67,23 @@ def addtocart(request,product_id):
             c.quantity = 1
         else:
             c.quantity = request.POST['quantity']
+        c.cost = getcart.p_cost
+        c.orderedby = request.user
+        c.save()
+        return redirect('home')
+    else:
+        form = CartForm
+        formfilter = Filter()
+        products = Product.objects
+        return render(request, 'products/home.html', {'products': products, 'form':form,'filter':formfilter})
+
+
+@login_required
+def addtowish(request,product_id):
+    if request.method == 'POST':
+        getcart = get_object_or_404(Product,pk=product_id)
+        c = Wish()
+        c.name = getcart.p_name
         c.cost = getcart.p_cost
         c.orderedby = request.user
         c.save()
