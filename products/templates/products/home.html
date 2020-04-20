@@ -68,6 +68,7 @@
                         <a class="nav-item nav-link" href="{%  url 'login' %}">Login</a>
                         {% endif %}
                         <a class="nav-item nav-link" href="{%  url 'showcart' %}">Cart</a>
+                        <a class="nav-item nav-link" href="{%  url 'wishlist' %}">WishList</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +97,7 @@
             </form>
         </div>
         <div class="column">
-            <div class="album py-5 bg-light" style="padding-left: 200px">
+            <div class="py-5 bg-light" style="padding-left: 200px">
                 <div class="container" align="center">
                     <div class="input-group mb-3">
                         <form method="POST" class="input-group-control" action="{% url 'home' %}">
@@ -112,30 +113,32 @@
                     <br />
                     <br />
                     <hr />
-                    <div class="row" style="left: 50px">
                         {% for product in products %}
-                            <div class="col-md-5">
-                                <div class="card mb-1 shadow-sm">
+                        <div class="row">
+                            <div class="column" style="width: 340px;padding-left: 35px">
+<!--                                <div class="card mb-1 shadow-sm">-->
                                     <img class="card-img-top" src="{{ product.p_image.url }}" alt="image" height="200" width="20">
-                                    <div class="card-body">
-                                        <a href="{% url 'detail' product.id%}"><p class="card-text">{{ product.p_name }}</p></a>
+                            </div>
+                            <div class="column" style="width: 440px;padding-left: 35px">
+                                        <a href="{% url 'detail' product.p_id%}"><p class="card-text">{{ product.p_name }}</p></a>
+                                        <br />
                                         <p class="card-text">{{ product.p_cost }} rupees</p>
-                                        <div class="input-group=text">
-                                        <form method="POST" action="{% url 'addtocart' product_id=product.id%}">
+                                        <form method="POST" action="{% url 'addtocart' product_id=product.p_id%}">
                                             {% csrf_token %}
                                             <p>{{form.as_p}}</p>
                                             <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to cart')}" value="Add to Cart" />
                                         </form>
-                                        <form method="POST" action="{% url 'addtowish' product_id=product.id%}">
+                            </div>
+                            <div class="column" style="width: 240px;padding-left: 35px">
+                                        <form method="POST" action="{% url 'addtowish' product_id=product.p_id%}">
                                             {% csrf_token %}
                                             <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to wishlist')}" value="WishList" />
                                         </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                    <br />
+                    <hr />
                         {% endfor %}
-                    </div>
                 </div>
             </div>
             <div align="center">

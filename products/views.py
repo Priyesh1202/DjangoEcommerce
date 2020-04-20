@@ -40,7 +40,7 @@ def homepage(request):
 
 
 def detail(request,product_id):
-    getproduct = get_object_or_404(Product,pk=product_id)
+    getproduct = get_object_or_404(Product,p_id=product_id)
     return render(request,'products/detail.html',{'product':getproduct})
 
 
@@ -60,8 +60,9 @@ def page(request,page_id):
 @login_required
 def addtocart(request,product_id):
     if request.method == 'POST':
-        getcart = get_object_or_404(Product,pk=product_id)
+        getcart = get_object_or_404(Product,p_id=product_id)
         c = CartNew()
+        c.c_id = getcart.p_id
         c.name = getcart.p_name
         if request.POST['quantity'] == '':
             c.quantity = 1
@@ -81,8 +82,9 @@ def addtocart(request,product_id):
 @login_required
 def addtowish(request,product_id):
     if request.method == 'POST':
-        getcart = get_object_or_404(Product,pk=product_id)
+        getcart = get_object_or_404(Product,p_id=product_id)
         c = Wish()
+        c.w_id = getcart.p_id
         c.name = getcart.p_name
         c.cost = getcart.p_cost
         c.orderedby = request.user
@@ -102,8 +104,20 @@ def showcart(request):
 
 
 @login_required
+def wishes(request):
+    form = CartForm()
+    allproducts = Wish.objects.filter(orderedby=request.user)
+    return render(request, 'products/wishlist.html', {'products': allproducts,'form':form})
+
+@login_required
 def editcart(request,product_id):
     if request.method == 'POST':
-        CartNew.objects.filter(pk=product_id).delete()
+        CartNew.objects.filter(c_id=product_id).delete()
     return showcart(request)
+
+@login_required
+def deleteallw(request):
+    if request.method == 'POST':
+        Wish.objects.all().delete()
+    return redirect('home')
 
