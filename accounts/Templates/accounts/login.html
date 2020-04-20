@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+<h1>Log In!!</h1>
+
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    UserName:
+    <br />
+    <input type="text" name="Username" />
+    <br />
+    Password :
+    <br />
+    <input type="password" name="password" />
+    <br />
+    <br />
+    <br />
+    <input class=" btn btn-primary" type="submit" value="Log In" />
+</form>
+
+{% endblock %}
+
+</body>
+</html>
