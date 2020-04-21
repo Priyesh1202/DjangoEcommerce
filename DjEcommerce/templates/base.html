@@ -10,7 +10,7 @@
     <title>Album example · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
-
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -67,7 +67,8 @@
                         <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
                         <a class="nav-item nav-link" href="{%  url 'login' %}">Login</a>
                         {% endif %}
-                        <a class="nav-item nav-link" href="{%  url 'showcart' %}">Cart</a>
+                        <a class="nav-item nav-link" href="{%  url 'wishlist' %}">WishList</a>
+                        <a class="nav-item nav-link" href="{%  url 'showcart' %}"><i class="shopping-cart"></i></a>
                     </div>
                 </div>
             </div>

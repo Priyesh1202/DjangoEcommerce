@@ -1,7 +1,7 @@
 from django import forms
 
 INTEGER_CHOICES= [tuple([x,x]) for x in range(1,10)]
-PRICES = [(100,100),(500,500),(1000,1000),(2500,2500),(5000,5000),(10000,10000)]
+PRICES = [(0,0),(100,100),(500,500),(1000,1000),(2500,2500),(5000,5000),(10000,10000)]
 
 class CartForm(forms.Form):
     quantity = forms.IntegerField(label="Quantity", widget=forms.Select(choices=INTEGER_CHOICES))

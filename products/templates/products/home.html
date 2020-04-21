@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -41,6 +42,8 @@
             }
         }
     </style>
+
+
     <!-- Custom styles for this template -->
 </head>
 <body>
@@ -67,8 +70,8 @@
                         <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
                         <a class="nav-item nav-link" href="{%  url 'login' %}">Login</a>
                         {% endif %}
-                        <a class="nav-item nav-link" href="{%  url 'showcart' %}">Cart</a>
                         <a class="nav-item nav-link" href="{%  url 'wishlist' %}">WishList</a>
+                        <a class="nav-item nav-link" href="{%  url 'showcart' %}"><i class="shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -87,27 +90,35 @@
         </div>
     </section>
     <div class="row">
-        <div class="column py-3 bg-light" style="padding-left: 50px">
+        <div class="column py-3 bg-light" style="padding-left:20px;width: 250px">
             <form method="POST" class="input-group-control" action="{% url 'home' %}">
                 {% csrf_token %}
             <p>Filter options:</p>
                 <p>Min price: {{filter.min_price}}</p>
                 <p>Max price: {{filter.max_price}}</p>
+                {% if filtererror %}
+                <p>{{filtererror}}</p>
+                {% endif %}
                 <input class="btn btn-primary" type="submit" value="Go" />
             </form>
         </div>
         <div class="column">
-            <div class="py-5 bg-light" style="padding-left: 200px">
+            <div class="py-5 bg-light" style="padding-left: 100px">
                 <div class="container" align="center">
                     <div class="input-group mb-3">
-                        <form method="POST" class="input-group-control" action="{% url 'home' %}">
+                        <form method="POST" action="{% url 'home' %}">
                             {% csrf_token %}
-                            <input class="input-group-text" style="width: 750px" type="text" name="search"/>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <input class="btn btn-primary" type="submit" value="Search" />
-                                </div>
+<!--                            <input class="input-group-text" style="width: 750px" type="text" name="search"/>-->
+<!--                            <input class="btn btn-primary" type="submit" value="Search" style="width: 100px"/>-->
+                            <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter product name" name="search" style="width: 800px">
+                            <div class="input-group-btn input-group-append">
+                              <button class="btn btn-primary" type="submit">
+<!--                                <i class="glyphicon glyphicon-search"></i>-->
+                                  Search
+                              </button>
                             </div>
+                          </div>
                         </form>
                     </div>
                     <br />
@@ -115,7 +126,7 @@
                     <hr />
                         {% for product in products %}
                         <div class="row">
-                            <div class="column" style="width: 340px;padding-left: 35px">
+                            <div class="column item" style="width: 340px;padding-left: 35px">
 <!--                                <div class="card mb-1 shadow-sm">-->
                                     <img class="card-img-top" src="{{ product.p_image.url }}" alt="image" height="200" width="20">
                             </div>
@@ -157,6 +168,8 @@
         <p>© Priyesh Vakharia {% now "Y" %}</p>
     </div>
 </footer>
+
+<script src="{% static 'javascript/homecart.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

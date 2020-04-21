@@ -24,13 +24,15 @@ urlpatterns = [
     path('',products.views.homepage, name='home'),
     path('addtocart/<int:product_id>/', products.views.addtocart, name='addtocart'),
     path('addtowish/<int:product_id>/', products.views.addtowish, name='addtowish'),
+    path('removewish/<int:product_id>/', products.views.removewish, name='deletefromwish'),
     path('wishlist/', products.views.wishes, name='wishlist'),
     path('emptywish/', products.views.deleteallw, name='delete'),
     path('<int:product_id>/',products.views.detail,name='detail'),
     path('cart/<int:product_id>/',products.views.editcart,name='editcart'),
     path('cart/',products.views.showcart,name='showcart'),
     path('accounts/', include('accounts.urls')),
-    path('orders/', include('orders.urls')),
-    path('page/<int:page_id>/',products.views.page,name='page')
+    path('checkout/',products.views.checkout,name='checkout'),
+    path('page/<int:page_id>/',products.views.page,name='page'),
+    path('placeorder/',products.views.placeorder,name='placeorder'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

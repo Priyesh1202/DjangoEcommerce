@@ -67,8 +67,8 @@
                         <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
                         <a class="nav-item nav-link" href="{%  url 'login' %}">Login</a>
                         {% endif %}
-                        <a class="nav-item nav-link" href="{%  url 'showcart' %}">Cart</a>
-                        <a class="nav-item nav-link active" href="{%  url 'wishlist' %}">WishList</a>
+                        <a class="nav-item nav-link" href="{%  url 'wishlist' %}">WishList</a>
+                        <a class="nav-item nav-link" href="{%  url 'showcart' %}"><i class="shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -92,36 +92,33 @@
 <!--                {% endif %}-->
             {% for product in products.all %}
             <div class="row">
-                <div class="column">
-                    <div class="container">
+                <div class="column" style="width: 150px">
+                    <br />
                     <p class="card-text">Name : {{ product.name }}</p>
-                    </div>
-                    <div class="container">
                     <p class="card-text">Cost : {{ product.cost }} rupees</p>
-                    </div>
                 </div>
-                <div class="column">
+                <div class="column" style="width: 150px">
                     <form method="POST" action="{% url 'addtocart' product_id=product.w_id%}">
                         {% csrf_token %}
                         <p>{{form.as_p}}</p>
                         <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to cart')}" value="Add to Cart" />
                     </form>
                 </div>
+                <div class="column" style="width: 150px">
+                    <form method="POST" action="{% url 'deletefromwish' product_id=product.w_id%}">
+                        {% csrf_token %}
+                        <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item deleted to from wishlist')}" value="Remove" />
+                    </form>
+                </div>
             </div>
             <br />
-<!--&lt;!&ndash;            ADD FORM TO ADD DELETE BUTTON&ndash;&gt;-->
-<!--            <form method="POST" action="{% url 'editcart' product.id %}">-->
-<!--                {% csrf_token %}-->
-<!--                <input class=" btn btn-primary" type="submit" value="Remove from Cart" />-->
-<!--            </form>-->
-<!--            <hr />-->
             {% endfor %}
         </div>
     </div>
     <div class="container">
         <form method="POST" action="{% url 'delete'%}">
             {% csrf_token %}
-            <input class=" btn btn-primary" type="submit" onclick="{ javascript:alert(' Your order has been placed') }" value="delete all" />
+            <input class=" btn btn-primary" type="submit" value="Remove all" />
         </form>
     </div>
 
