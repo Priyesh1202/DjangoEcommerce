@@ -17,12 +17,13 @@ def homepage(request):
             formfilter = Filter(request.POST)
             minp = request.POST['min_price']
             maxp = request.POST['max_price']
-            if minp>maxp:
+            if int(minp)>int(maxp):
                 formfilter1 = Filter()
                 products = Product.objects.raw('SELECT * FROM products_product;')
                 return render(request,'products/home.html',{'products':products,'form':form,'filter':formfilter1,'filtererror':'Please enter valid parameter values'})
-            products = Product.objects.raw('''SELECT * FROM products_product WHERE p_cost BETWEEN %s AND %s ''',[minp,maxp])
-            return render(request,'products/home.html',{'products':products,'form':form,'filter':formfilter})
+            else:
+                products = Product.objects.raw('''SELECT * FROM products_product WHERE p_cost BETWEEN %s AND %s ''',[minp,maxp])
+                return render(request,'products/home.html',{'products':products,'form':form,'filter':formfilter})
 
     else:
         form = CartForm()
