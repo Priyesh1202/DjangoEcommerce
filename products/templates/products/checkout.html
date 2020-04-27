@@ -44,11 +44,11 @@
   </head>
   <body class="bg-light">
   <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'letter.png' %}" class="d-inline-block align-top" height="30" width="30"/>
-                    Home
+                    <img src="{% static 'logo2.png' %}" class="d-inline-block align-top" height="30" width="30"/>
+                    Shopway
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,9 +76,7 @@
   </header>
     <div class="container">
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h2>Checkout form</h2>
-    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    <h2>Checkout</h2>
   </div>
 
   <div class="row">
@@ -250,7 +248,7 @@
   </div>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">© 2017-2019 Company Name</p>
+    <p class="mb-1">© Shopway {%now "Y"%}</p>
     <ul class="list-inline">
       <li class="list-inline-item"><a href="#">Privacy</a></li>
       <li class="list-inline-item"><a href="#">Terms</a></li>
