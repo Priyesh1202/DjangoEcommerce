@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
-    <title>Album example · Bootstrap</title>
+    <title>Home</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
 
@@ -52,7 +52,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'letter.png' %}" class="d-inline-block align-top" height="30" width="30"/>
-                    roduct Hunt
+                    Home
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,10 +82,10 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1>Hi I'm Priyesh</h1>
-            <p class="lead text-muted">Hey we have the best collections of everything</p>
+            <h1>[Name]</h1>
+            <p class="lead text-muted">Bringing you the best collections at the best price.</p>
             <p>
-                <a href="mailto:priyesh.vakharia@gmail.com" class="btn btn-primary my-2">Email me for becoming a seller</a>
+                <a href="mailto:priyesh.vakharia@gmail.com" class="btn btn-primary my-2">Click here to become a seller</a>
             </p>
         </div>
     </section>
@@ -99,7 +99,7 @@
                 {% if filtererror %}
                 <p>{{filtererror}}</p>
                 {% endif %}
-                <input class="btn btn-primary" type="submit" value="Go" />
+                <input class="btn btn-primary" type="submit" value="Go">
             </form>
         </div>
         <div class="column">
@@ -111,7 +111,7 @@
 <!--                            <input class="input-group-text" style="width: 750px" type="text" name="search"/>-->
 <!--                            <input class="btn btn-primary" type="submit" value="Search" style="width: 100px"/>-->
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter product name" name="search" style="width: 800px">
+                            <input type="text" class="form-control" placeholder="Search for a product" name="search" style="width: 800px">
                             <div class="input-group-btn input-group-append">
                               <button class="btn btn-primary" type="submit">
 <!--                                <i class="glyphicon glyphicon-search"></i>-->
@@ -133,7 +133,7 @@
                             <div class="column" style="width: 440px;padding-left: 35px">
                                         <a href="{% url 'detail' product.p_id%}"><p class="card-text">{{ product.p_name }}</p></a>
                                         <br />
-                                        <p class="card-text">{{ product.p_cost }} rupees</p>
+                                        <pre class="card-text">₹{{ product.p_cost }}</pre>
                                         <form method="POST" action="{% url 'addtocart' product_id=product.p_id%}">
                                             {% csrf_token %}
                                             <p>{{form.as_p}}</p>
@@ -152,7 +152,7 @@
                         {% endfor %}
                 </div>
             </div>
-            <div align="center">
+            <div style="text-align: center;">
                 <p>
                     {% for i in pages %}
                         <a href="{% url 'page' page_id=i%}"> {{i}}</a>|

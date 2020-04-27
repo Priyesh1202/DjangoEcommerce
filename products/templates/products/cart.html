@@ -49,7 +49,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'letter.png' %}" class="d-inline-block align-top" height="30" width="30"/>
-                    roduct Hunt
+                    Home
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,27 +75,27 @@
         </nav>
 </header>
 
-<main role="main">
+<main role="main" style="margin-left: 4%; margin-right: 4%;">
 
-    <section class="jumbotron text-center">
+    <!-- <section class="jumbotron text-center"> -->
         <div class="container">
-            <h1>CART</h1>
-            <p class="lead text-muted">See all your selected products</p>
+            <h1>Your Cart</h1>
+            <p class="lead text-muted">Confirm checkout</p>
         </div>
-    </section>
+    <!-- </section> -->
 
     <div class="album py-5 bg-light">
-        <div class="container">
+        <div class="container" style="padding-left: 5%; padding-right: 5%;">
             {% for product in products.all %}
             <div class="row">
                 <div class="container">
-                <p class="card-text">Name : {{ product.name }}</p>
+                <p class="card-text">{{ product.name }}</p>
                 </div>
                 <div class="container">
                 Quantity  : <span class="card-text q">{{ product.quantity }}</span>
                 </div>
                 <div class="container">
-                    Cost :<span class="card-text money">{{product.cost}}</span> rupees
+                    Cost: ₹<span class="card-text money">{{product.cost}}</span>
                 </div>
             </div>
             <br />
@@ -107,21 +107,22 @@
             <hr />
             {% endfor %}
         </div>
-        <div class="row">
+        <div class="row container" style="margin-left: 5%; padding-left: 5%; padding-right: 5%;">
             <div class="column">
-                <p>Total Amount:</p>
+                <pre>Total Amount: </pre>
             </div>
             <div class="column">
-                <p id="2"></p>
+                <pre id="2"></pre>
             </div>
-
         </div>
+        <div class="row  container" style="margin-left: 5%; padding-left: 5%; padding-right: 5%;">
+            <form method="POST" action="{% url 'checkout'%}">
+                {% csrf_token %}
+                <input class=" btn btn-primary" type="submit" onclick="{ javascript:alert('Proceeding to final payment') }" value="Checkout" />
+            </form></div>
     </div>
     <div class="container">
-        <form method="POST" action="{% url 'checkout'%}">
-            {% csrf_token %}
-            <input class=" btn btn-primary" type="submit" onclick="{ javascript:alert('Proceeding to final payment') }" value="Checkout" />
-        </form>
+       
     </div>
 
 </main>
