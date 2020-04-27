@@ -53,6 +53,8 @@ def detail(request,product_id):
 
 
 def page(request,page_id):
+    form = CartForm()
+    formfilter = Filter()
     products = Product.objects.raw('SELECT * FROM products_product;')
     x = len(products)
     if x % 4 == 0:
@@ -63,7 +65,7 @@ def page(request,page_id):
     l = [i for i in range(2, int(x) + 1)]
     start = (page_id-1)*4 +1
     end = page_id*4 +1
-    return render(request, 'products/home.html',{'products': products[start:end], 'pages': l,'page_no':page_id})
+    return render(request, 'products/home.html',{'products': products[start:end], 'pages': l,'page_no':page_id, 'form': form, 'filter': formfilter})
 
 @login_required
 def addtocart(request,product_id):
