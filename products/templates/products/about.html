@@ -1,0 +1,67 @@
+{%extends "base.html" %}
+{% block content %}
+<style>
+    .centered {
+        text-align: center;
+    }
+
+    #vision {
+        margin: 0 10%;
+    }
+
+
+    #intro,
+    #navbar,
+    #footer,
+    #team {
+        margin: 0;
+        background-color: white;
+    }
+
+    li {
+        margin-bottom: 1%;
+    }
+
+    #navbar {
+        margin-top: 7%;
+    }
+    .container {
+        width: 100%;
+    }
+</style>
+<div class="container">
+    <div id="intro">
+        <div class="centered">
+            <h1>-Our Vision-</h1>
+            <h3>To provide the most (adjective) web-store</h3>
+            <br>
+            <h1>About</h1>
+        </div>
+        <div class="centered" id="vision">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non possimus repudiandae quod rerum expedita!
+            Fugiat unde quam suscipit tempora fugit nobis, est expedita harum autem dolore deserunt similique assumenda
+            nulla!
+        </div>
+    </div>
+    <br>
+    <div id="team">
+        <br>
+        <h1 class="centered">TEAM</h1>
+        <ul>
+            <li>Priyesh Vakharia</li>
+            <li>Yogesh Deshpande</li>
+            <li>Riya Gupta</li>
+            <li>Sunandan Sharma</li>
+        </ul>
+        <br>
+    </div>
+    <br>
+    <div id="footer">
+        <p>Contact Us</p>
+        <pre>
+    Email-id: brand_name@gmail.com
+    Phone: +91-8632827058
+        </pre>
+    </div>
+</div>
+{% endblock content%}

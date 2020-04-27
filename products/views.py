@@ -42,6 +42,10 @@ def homepage(request):
                       {'products': products[:4], 'pages': l, 'page_no': t, 'form': form, 'filter': formfilter})
 
 
+def about(request):
+    return render(request, 'products/about.html')
+
+
 def detail(request,product_id):
     getproduct = get_object_or_404(Product,p_id=product_id)
     form = CartForm()
