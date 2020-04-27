@@ -1,39 +1,154 @@
-{% extends 'base.html' %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends "base.html" %}
+
 <body>
-{% block content %}
+    {%block content%}
+    <style>
+        .main-body {
+            text-align: center;
+        }
 
-{% if error %}
-{{ error }}
-<br />
-<br />
-{% endif %}
+        .send-button {
+            background: #54C7C3;
+            width: 100%;
+            font-weight: 600;
+            color: #fff;
+            padding: 8px 25px;
+        }
 
-<h1>Sign Up!!</h1>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-<form method="POST" action="{% url 'signup' %}">
-    {% csrf_token %}
-    UserName:
-    <br />
-    <input type="text" name="Username" />
-    <br />
-    Password :
-    <br />
-    <input type="password" name="password1" />
-    <br />
-    Confirm Password :
-    <br />
-    <input type="password" name="password2" />
-    <br />
-    <br />
-    <input class=" btn btn-primary" type="submit" value="Sign Up" />
-</form>
+        .g-button {
+            color: #fff !important;
+            border: 1px solid #EA4335;
+            background: #ea4335 !important;
+            width: 100%;
+            font-weight: 600;
+            color: #fff;
+            padding: 8px 25px;
+        }
 
-{% endblock %}
+        .my-input {
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            cursor: text;
+            padding: 8px 10px;
+            transition: border .1s linear;
+        }
 
+        .header-title {
+            margin: 5rem 0;
+        }
+
+        h1 {
+            font-size: 31px;
+            line-height: 40px;
+            font-weight: 600;
+            color: #4c5357;
+        }
+
+        h2 {
+            color: #5e8396;
+            font-size: 21px;
+            line-height: 32px;
+            font-weight: 400;
+        }
+
+        .login-or {
+            position: relative;
+            color: #aaa;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .span-or {
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: -2px;
+            margin-left: -25px;
+            background-color: #fff;
+            width: 50px;
+            text-align: center;
+        }
+
+        .hr-or {
+            height: 1px;
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+
+        @media screen and (max-width:480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+    {%if error %}
+    {{ error }}
+    <br>
+    <br>
+    {% else %}
+    <!-- <div class="container main-body">
+        <h1>Sign Up</h1>
+        <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            Username
+            <br>
+            <input type="text" name="Username">
+            <br>
+            Password
+            <input type="text" name="Password">
+
+        </form>
+    </div> -->
+    <body>
+        <div class="container">
+            <div class="col-md-6 mx-auto text-center">
+                <div class="header-title">
+                    <h1 class="wv-heading--title">
+                        Sign Up
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <div class="myform form ">
+                        <form action="{% url 'signup' %}" method="post" name="login">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="Username" class="form-control my-input" id="Username"
+                                    placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password1" class="form-control my-input" id="password1"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password2" id="password2" class="form-control my-input"
+                                    placeholder="Confirm password">
+                            </div>
+                            <div class="text-center ">
+                                <button type="submit" class=" btn btn-block send-button tx-tfm" value="Sign Up">Create Your Free
+                                    Account</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    {% endif %}
+    {% endblock %}
 </body>
+
 </html>
