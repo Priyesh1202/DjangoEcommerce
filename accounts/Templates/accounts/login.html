@@ -91,12 +91,12 @@
     }
 </style>
 {% if error %}
+<h1 class="text-center" style="margin-top: 2%; color: red; margin-bottom: 0;">
 {{ error }}
-<br />
-<br />
-{% else %}
-
+</h1>
+{% endif %}
 <div class="col-md-6 mx-auto text-center">
+    
     <div class="header-title">
         <h1 class="wv-heading--title">
             Login
@@ -121,7 +121,7 @@
         </div>
     </div>
 </div>
-{% endif %}
+
 {% endblock %}
 
 </body>

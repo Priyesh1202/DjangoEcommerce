@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     {% load staticfiles %}
     <meta charset="utf-8">
@@ -13,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -43,22 +44,24 @@
     </style>
     <!-- Custom styles for this template -->
 </head>
-<body>
-<header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'logo2.png' %}" class="d-inline-block align-top" height="30" width="30"/>
-                    Name
+                    <img src="{% static 'logo2.png' %}" class="d-inline-block align-top" height="30" width="30" />
+                    Shopway
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav , ml-auto">
                         {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Log Out</a>
+                        <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Log
+                            Out</a>
                         <form id="logout" method="POST" action="{% url 'logout' %}">
                             {% csrf_token %}
                             <input type="hidden" />
@@ -74,75 +77,79 @@
                 </div>
             </div>
         </nav>
-</header>
+    </header>
 
-<main role="main">
+    <main role="main">
 
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1>Your Wishlist</h1>
+        <div class=" text-center bg-light" style="font-size: 2.0rem; margin-top: 2%; text-decoration: dashed;">
+            Your Wishlist
         </div>
-    </section>
 
-    <div class="album py-5 bg-light">
-        <div class="container">
-<!--                {% if error %}-->
-<!--                {{ error }}-->
-<!--                <br />-->
-<!--                <br />-->
-<!--                {% endif %}-->
-            {% for product in products.all %}
-            <div class="row">
-                <div class="column item" style="width: 340px;padding-left: 35px">
-                    <!--                                <div class="card mb-1 shadow-sm">-->
-                    <img class="card-img-top" src="{{ product.image.url }}" alt="image">
-                </div>
-                <div class="column" style="width: 200px">
-                    <br />
-                    <p class="card-text">{{ product.name }}</p>
-                    <p class="card-text">Cost: ₹{{ product.cost }}</p>
-                </div>
-                <div class="column" style="width: 150px">
-                    <form method="POST" action="{% url 'addtocart' product_id=product.w_id%}">
-                        {% csrf_token %}
-                        <p>{{form.as_p}}</p>
-                        <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to cart')}" value="Add to Cart" />
-                    </form>
-                    <form style ="margin-top: 5%;" method="POST" action="{% url 'deletefromwish' product_id=product.w_id%}">
-                        {% csrf_token %}
-                        <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item deleted to from wishlist')}" value="Remove" />
-                    </form>
-                </div>
-                <!-- <div class="column" style="width: 150px">
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <!--                {% if error %}-->
+                <!--                {{ error }}-->
+                <!--                <br />-->
+                <!--                <br />-->
+                <!--                {% endif %}-->
+                {% for product in products.all %}
+                <div class="row" style="border: 2px solid grey; text-align: center; width: 70%; margin-left: auto; margin-right: auto;">
+                    <div class="column item" style="width: 340px;padding-left: 35px">
+                        <!--                                <div class="card mb-1 shadow-sm">-->
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="image">
+                    </div>
+                    <div class="column" style="width: 200px">
+                        <br />
+                        <p class="card-text">{{ product.name }}</p>
+                        <p class="card-text">Cost: ₹{{ product.cost }}</p>
+                    </div>
+                    <div class="column" style="width: 150px">
+                        <form method="POST" action="{% url 'addtocart' product_id=product.w_id%}">
+                            {% csrf_token %}
+                            <p>{{form.as_p}}</p>
+                            <input class=" btn btn-primary" type="submit"
+                                onclick="{javascript:alert('Item added to cart')}" value="Add to Cart" />
+                        </form>
+                        <form style="margin-top: 5%;" method="POST"
+                            action="{% url 'deletefromwish' product_id=product.w_id%}">
+                            {% csrf_token %}
+                            <input class=" btn btn-primary" type="submit"
+                                onclick="{javascript:alert('Item deleted to from wishlist')}" value="Remove" />
+                        </form>
+                    </div>
+                    <!-- <div class="column" style="width: 150px">
                    
                 </div> -->
+                </div>
+                <br />
+                {% endfor %}
             </div>
-            <br />
-            {% endfor %}
         </div>
-    </div>
-    <div class="container">
-        <form method="POST" action="{% url 'delete'%}">
-            {% csrf_token %}
-            <input class="btn btn-primary" style="margin-top: 1%;" type="submit" value="Remove all" />
-        </form>
-    </div>
+        <div class="container">
+            <form method="POST" action="{% url 'delete'%}">
+                {% csrf_token %}
+                <div class="text-center">
+                <input class="btn btn-primary" style="margin-top: 1%;" type="submit" value="Remove all" />
+            </div>
+            </form>
+        </div>
 
-</main>
+    </main>
 
-<footer class="text-muted">
-    <div class="container text-center">
-        <p>© Priyesh Vakharia {% now "Y" %}</p>
-    </div>
-</footer>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    <footer class="text-muted">
+        <div class="container text-center">
+            <p>© Shopway {% now "Y" %}</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
