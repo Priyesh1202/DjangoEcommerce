@@ -93,6 +93,10 @@
 <!--                {% endif %}-->
             {% for product in products.all %}
             <div class="row">
+                <div class="column item" style="width: 340px;padding-left: 35px">
+                    <!--                                <div class="card mb-1 shadow-sm">-->
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="image">
+                </div>
                 <div class="column" style="width: 200px">
                     <br />
                     <p class="card-text">{{ product.name }}</p>

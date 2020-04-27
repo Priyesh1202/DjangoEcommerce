@@ -111,6 +111,8 @@ def addtowish(request,product_id):
         c.w_id = getcart.p_id
         c.name = getcart.p_name
         c.cost = getcart.p_cost
+        print(type(getcart.p_image))
+        c.image = getcart.p_image
         c.orderedby = request.user
         c.save()
         return redirect('home')

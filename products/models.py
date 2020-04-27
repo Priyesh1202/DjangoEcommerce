@@ -24,4 +24,5 @@ class Wish(models.Model):
     w_id = models.IntegerField(default=0)
     name = models.CharField(max_length=30)
     cost = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='wish/',default='default.jpg')
     orderedby = models.ForeignKey(User,on_delete=models.CASCADE)
