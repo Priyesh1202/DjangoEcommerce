@@ -122,13 +122,14 @@
                                     <img class="card-img-top" src="{{ product.p_image.url }}" alt="image">
                             </div>
                             <div class="column" style="width: 440px;padding-left: 35px">
-                                        <a href="{% url 'detail' product.p_id%}"><p class="card-text">{{ product.p_name }}</p></a>
+                                        <a href="{% url 'detail' product_id=product.p_id%}"><p class="card-text">{{ product.p_name }}</p></a>
                                         <br />
                                         <pre class="card-text">₹{{ product.p_cost }}</pre>
-                                        <form method="POST" action="{% url 'addtocart' product_id=product.p_id%}">
+                                        <form id="addingtocart" method="POST" action="{% url 'addtocart' product_id=product.p_id%}">
                                             {% csrf_token %}
-                                            <p>{{form.as_p}}</p>
-                                            <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to cart')}" value="Add to Cart" />
+                                            <p id="p_id" style="visibility: hidden">product.id</p>
+                                            <p id="quantity">{{form.as_p}}</p>
+                                            <input class=" btn btn-primary" type="submit" value="Add to Cart" />
                                         </form>
                             </div>
                             <div class="column" style="width: 240px;padding-left: 35px">
@@ -163,6 +164,8 @@
         <p>© Shopway {% now "Y" %}</p>
     </div>
 </footer>
+
+
 
 <script src="{% static 'javascript/homecart.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

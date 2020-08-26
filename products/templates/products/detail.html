@@ -16,7 +16,7 @@
         <form method="POST" action="{% url 'addtocart' product_id=product.p_id%}">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
-            <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to cart')}" value="Add to Cart"/>
+            <input class=" btn btn-primary" type="submit"}" value="Add to Cart"/>
         </form>
         <br />
         <form method="POST" action="{% url 'addtowish' product_id=product.p_id%}">
@@ -24,6 +24,7 @@
             <input class=" btn btn-primary" type="submit" onclick="{javascript:alert('Item added to wishlist')}"
                    value="WishList"/>
         </form>
+        <p>{{ error }}</p>
     </div>
 </div>
 </div>

@@ -77,8 +77,9 @@
 </header>
 
 <main role="main" style="margin-left: auto; margin-right: auto; width: 70%;">
-
+{% with total_items=products|length %}
     <!-- <section class="jumbotron text-center"> -->
+    {% if total_items > 0 %}
         <div class="container">
             <h1>Your Cart</h1>
             <p class="lead text-muted">Confirm checkout</p>
@@ -125,7 +126,15 @@
     <div class="container">
        
     </div>
+    {% else %}
+        <br />
+        <div style="display: flex; flex-direction: column; align-items: center" class="container">
+            <h1>Your Cart is Empty</h1>
+        </div>
+        <br />
 
+    {% endif %}
+{% endwith %}
 </main>
 
 <footer class="text-muted">

@@ -28,7 +28,7 @@ def homepage(request):
     else:
         form = CartForm()
         formfilter = Filter()
-        deals = Product.objects.raw('SELECT * FROM products_product WHERE p_discount>10;')
+        # deals = Product.objects.raw('SELECT * FROM products_product WHERE p_discount>10;')
         products = Product.objects.raw('SELECT * FROM products_product;')
         x = len(products)
         if x%4==0:
@@ -46,10 +46,10 @@ def about(request):
     return render(request, 'products/about.html')
 
 
-def detail(request,product_id):
+def detail(request,product_id,error=''):
     getproduct = get_object_or_404(Product,p_id=product_id)
     form = CartForm()
-    return render(request,'products/detail.html',{'product':getproduct,'form':form})
+    return render(request,'products/detail.html',{'product':getproduct,'form':form,'error':error})
 
 
 def page(request,page_id):
@@ -69,29 +69,36 @@ def page(request,page_id):
 
 @login_required
 def addtocart(request,product_id):
+    print(request)
     if request.method == 'POST':
-        getcart = get_object_or_404(Product,p_id=product_id)
+        form = CartForm()
+        getproduct = get_object_or_404(Product,p_id=product_id)
         cart = CartNew.objects.filter(orderedby=request.user)
         c = CartNew()
-        c.c_id = getcart.p_id
-        c.name = getcart.p_name
+        c.c_id = getproduct.p_id
+        c.name = getproduct.p_name
         if request.POST['quantity'] == '':
             c.quantity = 1
         else:
             c.quantity = request.POST['quantity']
-        c.cost = getcart.p_cost
+        total = getproduct.p_stock
+        t = int(c.quantity)
+        print(t)
+        print(total)
+        if total<t:
+            error='Invalid quantity. Please order lower amount'
+            return detail(request,getproduct.p_id,error)
+        c.cost = getproduct.p_cost
         c.orderedby = request.user
-        print(cart)
-        print(c)
+        getproduct.p_stock = getproduct.p_stock - t
+        getproduct.save()
         flag = 0
         for t in cart:
             if t.c_id==c.c_id:
                 flag=1
         if flag==1:
             getcart = get_object_or_404(CartNew, c_id=product_id)
-            print(getcart.quantity)
             getcart.quantity = int(getcart.quantity) + int(c.quantity)
-            print(getcart.quantity)
             getcart.save()
         else:
             c.save()
@@ -111,7 +118,6 @@ def addtowish(request,product_id):
         c.w_id = getcart.p_id
         c.name = getcart.p_name
         c.cost = getcart.p_cost
-        print(type(getcart.p_image))
         c.image = getcart.p_image
         c.orderedby = request.user
         c.save()
@@ -129,7 +135,8 @@ def showcart(request):
     # for i in range(len(allproducts)):
     #     while allproducts[i] in allproducts[i:]:
     #         allproducts[i].quantity++
-    return render(request, 'products/cart.html', {'products': allproducts})
+    t = len(allproducts)
+    return render(request, 'products/cart.html', {'products': allproducts,'len':t})
 
 
 @login_required
@@ -147,6 +154,10 @@ def removewish(request,product_id):
 @login_required
 def editcart(request,product_id):
     if request.method == 'POST':
+        getproduct = get_object_or_404(Product, p_id=product_id)
+        getcart = get_object_or_404(CartNew, c_id=product_id)
+        getproduct.p_stock = getproduct.p_stock + getcart.quantity
+        getproduct.save()
         CartNew.objects.filter(c_id=product_id).delete()
     return showcart(request)
 
